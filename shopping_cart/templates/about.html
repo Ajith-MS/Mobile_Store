@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Mobile Store</title>
+    <style>
+     ul
+    {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li
+    {
+        float: left;
+    }
+    li a
+    {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover:not(.active)
+    {
+        background-color: #04AA6D;
+    }
+       .active
+    {
+        background-color: #04AA6D;
+    }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-image: url("{% static 'images/7.jpg' %}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100%;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .newh1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .newh2 {
+            color: #343a40;
+            margin-top: 30px;
+        }
+        .newp {
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        .newul {
+            list-style: none;
+            padding: 0;
+        }
+        .newli {
+            background: black;
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .header {
+            text-align: center;
+            padding: 15px;
+            background: black;
+            color: white;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: black;
+            color: white;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .ceo-section {
+            margin-top: 30px;
+        }
+        .ceo-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: 10px;
+        }
+        .newa {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .newa:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+ <ul>
+        <li><a href="{% url 'product_management:viewproducts' %}">Home</a></li>
+        <li><a class="active" href="{% url 'shopping_cart:aboutpage' %}">About</a></li>
+        <li><a href="{% url 'shopping_cart:contactus' %}">Contact</a></li>
+        <li style="float:right"><a href="{% url 'user_authentication:userlogout' %}">Logout</a></li>
+        <li ><a class="navbar-brand" href="{% url 'user_authentication:userview' %}">
+    <img src="{% static 'images/user_avatar.png' %}" width="20" height="15" alt="">
+  </a></li>
+        <li style="float:right"><a href="{% url 'shopping_cart:listcart'%}">Cart</a></li>
+    </ul>
+    <div class="header">
+        <p>About Us</p>
+    </div>
+    <div class="container">
+        <p class="newp">Welcome to <strong>Mobile Store</strong>, your one-stop destination for the latest and greatest mobile phones. We are committed to providing our customers with top-quality products at the best prices.</p>
+
+        <div class="ceo-section">
+            <h2 class="newh2">Meet Our CEO</h2>
+            <img src="/static/images/IMG_6136(1).jpg" alt="CEO" class="ceo-img">
+            <p class="newp"><strong>Ajith MS</strong> - CEO & Founder</p>
+            <p class="newp">"Our vision is to revolutionize mobile shopping with trust, affordability, and top-notch service."</p>
+        </div>
+
+        <h2 class="newh2">Our Mission</h2>
+        <p class="newp">Our mission is to make the latest technology accessible to everyone by offering a wide range of mobile phones with exceptional customer service.</p>
+
+        <h2 class="newh2">Why Choose Us?</h2>
+        <ul class="newul">
+            <li class="newli">Wide selection of top mobile brands</li>
+            <li class="newli">Affordable prices and exclusive deals</li>
+            <li class="newli">Secure payment options</li>
+            <li class="newli">Authentic products with warranty</li>
+            <li class="newli">Fast and reliable delivery</li>
+        </ul>
+
+        <h2 class="newh2">Customer Commitment</h2>
+        <p class="newp">We believe in customer satisfaction and strive to provide the best service, including easy returns, 24/7 support, and secure shopping.</p>
+
+
+        <p class="newp">Follow us on social media: <a class="newa" href="#">Facebook</a> | <a class="newa" href="#">Twitter</a> | <a class="newa" href="#">Instagram</a></p>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 Mobile Store. All rights reserved.
+    </div>
+</body>
+</html>

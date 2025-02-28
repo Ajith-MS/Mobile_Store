@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userupdate</title>
+    <style>
+      ul
+    {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li
+    {
+        float: left;
+    }
+    li a
+    {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover:not(.active)
+    {
+        background-color: #04AA6D;
+    }
+       .active
+    {
+        background-color: #04AA6D;
+    }
+
+            form
+        {
+            margin: auto;
+            width: 30%;
+            padding: 20px;
+            background-color: #f3f2f2;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center; / Align form content to center /
+        }
+        .image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid green;
+            }
+
+         body
+        {
+            background-image: url("{% static 'images/7.jpg' %}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+  <ul>
+        <li><a href="{% url 'product_management:viewproducts' %}">Home</a></li>
+        <li><a href="{% url 'shopping_cart:aboutpage' %}">About</a></li>
+        <li><a href="{% url 'shopping_cart:contactus' %}">Contact</a></li>
+        <li style="float:right"><a href="{% url 'user_authentication:userlogout' %}">Logout</a></li>
+        <li class="active"><a class="navbar-brand" href="{% url 'user_authentication:userview' %}">
+    <img src="{% static 'images/user_avatar.png' %}" width="20" height="15" alt="">{{user}}
+  </a></li>
+        <li style="float:right"><a href="{% url 'shopping_cart:listcart'%}">Cart</a></li>
+    </ul>
+            <center><h1>Update User</h1></center>
+<hr>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <br><br>
+        <div style="text-align: center;">
+            <!-- Hidden file input -->
+            <input type="file" name="profilepicture" id="profilepicture" accept="image/*"
+                   style="display: none;" onchange="previewImage(event)">
+
+            <!-- Profile picture preview -->
+            <label for="profilepicture">
+                <img src="/media/{{ user.profile_picture }}" alt="Avatar" id="profilePreview"
+                     style="width: 150px; height: 150px; border-radius: 50%; cursor: pointer;
+                            object-fit: cover; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+            </label>
+            <p>Click on the image to change</p>
+        </div>
+        <script>
+            function previewImage(event) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var output = document.getElementById('profilePreview');
+                    output.src = reader.result; // Set the new image preview
+                }
+                reader.readAsDataURL(event.target.files[0]); // Read the new file
+            }
+        </script>
+
+
+            <label >User Name</label><br>
+            <input type="text" value="{{user.username}}" name="username" ><br><br>
+
+            <label >Email</label><br>
+            <input type="email" value="{{user.email}}" name="email" required><br><br>
+
+            <label >First Name</label><br>
+            <input type="text" value="{{user.first_name}}" name="firstname" required><br><br>
+
+            <label >Last Name</label><br>
+            <input type="text" value="{{user.last_name}}" name="lastname"><br><br>
+
+            <label >Address</label><br>
+            <input type="text" value="{{user.address}}" name="address" required><br><br>
+
+            <label >Phone Number</label><br>
+            <input type="number" value="{{user.phone_number}}" name="phonenumber" required><br><br>
+
+            <hr>
+            <center><button>Update User</button></center>
+        </div>
+
+    </form>
+</body>
+</html>

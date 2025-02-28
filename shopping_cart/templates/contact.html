@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <style>
+         ul
+    {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li
+    {
+        float: left;
+    }
+    li a
+    {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover:not(.active)
+    {
+        background-color: #04AA6D;
+    }
+       .active
+    {
+        background-color: #04AA6D;
+    }
+    .container
+    {
+        background-color: #f3f2f2;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 700px;
+        margin: 50px auto;
+
+    }
+     body
+    {
+        background-image: url("{% static 'images/7.jpg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 100%;
+    }
+
+        .contact-form {
+        background-color: #f3f2f2;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 700px;
+        margin: 50px auto;
+
+
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .contact-form button {
+            background: #04AA6D;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .contact-form button:hover {
+            background: #038f5a;
+        }
+    </style>
+</head>
+<body>
+        <ul>
+            <li><a href="{% url 'product_management:viewproducts' %}">Home</a></li>
+            <li><a href="{% url 'shopping_cart:aboutpage' %}">About</a></li>
+            <li><a class="active" href="{% url 'shopping_cart:contactus' %}">Contact</a></li>
+            <li style="float:right"><a href="{% url 'user_authentication:userlogout' %}">Logout</a></li>
+            <li>  <a class="navbar-brand" href="{% url 'user_authentication:userview' %}">
+            <img src="{% static 'images/user_avatar.png' %}" width="20" height="15" alt="">
+            </a></li>
+            <li style="float:right"><a href="{% url 'shopping_cart:listcart'%}">Cart</a></li>
+        </ul>
+        <center><h1>CONTACT US</h1></center>
+        <hr>
+        <div class="container">
+        <center>
+            <p>Email: <a href="#">support@mobilestore.com</a></p>
+            <p>Phone: 8921271860</p>
+            <p>Follow us on social media: <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
+            </center>
+        </div>
+        <div class="contact-form">
+            <h2 style="text-align:center;">Send Us a Message</h2>
+                <form method="post" action="" style="width:680px;">
+                    {% csrf_token %}
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" style="width:680px;">Send Message</button>
+                </form>
+        </div>
+</body>
+</html>

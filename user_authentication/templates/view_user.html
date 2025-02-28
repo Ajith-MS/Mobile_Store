@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userview</title>
+    <style>
+        ul
+    {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li
+    {
+        float: left;
+    }
+    li a
+    {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover:not(.active)
+    {
+        background-color: #04AA6D;
+    }
+       .active
+    {
+        background-color: #04AA6D;
+    }
+  .profile-container {
+            background-color: #dcdadb;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            margin: auto;
+            margin: 50px auto;
+        }
+    .image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid green;
+            }
+
+
+        h1
+        {
+            text-align: center;
+        }
+        form
+        {
+            margin: auto;
+            width: 30%;
+            padding: 20px;
+            background-color: #f3f2f2;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center; / Align form content to center /
+        }
+        div
+        {
+            text-align: center;
+        }
+                 body
+        {
+            background-image: url("{% static 'images/7.jpg' %}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+     <ul>
+        <li><a href="{% url 'product_management:viewproducts' %}">Home</a></li>
+        <li><a href="{% url 'shopping_cart:aboutpage' %}">About</a></li>
+        <li><a href="{% url 'shopping_cart:contactus' %}">Contact</a></li>
+        <li style="float:right"><a href="{% url 'user_authentication:userlogout' %}">Logout</a></li>
+        <li class="active"><a class="navbar-brand" href="{% url 'user_authentication:userview' %}">
+    <img src="{% static 'images/user_avatar.png' %}" width="20" height="15" alt="">{{user}}
+  </a></li>
+        <li style="float:right"><a href="{% url 'shopping_cart:listcart'%}">Cart</a></li>
+    </ul>
+
+    <h1>WELCOME  - {{user}}</h1>
+    <hr>
+    <div class="profile-container">
+        <p><img   src="/media/{{user.profile_picture}}" alt="Avatar" class="image"><br></p>
+        <p>USERNAME : {{user.username}}</p>
+        <p>FIRST NAME : {{user.first_name}}</p>
+        <p>LAST NAME :{{user.last_name}}</p>
+        <p>EMAIL : {{user.email}}</p>
+        <p>PHONE NUMBER : {{user.phone_number}}</p>
+        <P>ADDRESS : {{user.address}}</P>
+        <button><a class="a1" style="text-decoration:none" href="{% url 'user_authentication:userupdate'  %}">Edit User</a></button>
+    </div>
+</body>
+</html>
+

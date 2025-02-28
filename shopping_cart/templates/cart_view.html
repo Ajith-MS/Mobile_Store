@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cartview</title>
+        <style>
+            ul
+            {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+            li
+            {
+                float: left;
+            }
+            li a
+            {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            li a:hover:not(.active)
+            {
+                background-color: #04AA6D;
+            }
+            .active
+            {
+                background-color: #04AA6D;
+            }
+
+        .container {
+            display: flex;
+            align-items: center;
+            width: 60%;
+            margin: 20px auto;
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .container:hover
+        {
+            transform: scale(1.05);
+        }
+        .image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .details {
+            font-family: Arial, sans-serif;
+        }
+        .details h2 {
+            margin: 0;
+            color: #333;
+        }
+        .details p {
+            margin: 5px 0;
+            color: #666;
+        }
+         .button
+        {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+    </style>
+    <script src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnwm5VjiMtqadP54mTyHNWP6eaFA5r2Bup9A&s' crossorigin='anonymous'></script>
+</head>
+<body>
+    <ul>
+        <li><a href="{% url 'product_management:viewproducts' %}">Home</a></li>
+        <li><a href="{% url 'shopping_cart:aboutpage' %}">About</a></li>
+         <li><a href="{% url 'shopping_cart:contactus' %}">Contact</a></li>
+         <li style="float:right"><a href="{% url 'user_authentication:userlogout' %}">Logout</a></li>
+        <li style="float:right"><a class="active" href="{% url 'shopping_cart:listcart'%}">Cart</a></li>
+
+    </ul>
+    <center><h1>CART VIEW</h1></center>
+    <hr>
+    {% if products %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for product in products %}
+
+        <div class="container">
+        <img src="/media/{{product.product_id.product_image}}" alt="Image" class="image">
+            <div class="details">
+                <h2>{{product.product_id.product_name}}</h2>
+                <p>Rs.{{product.product_id.product_price}}</p>
+                <p>Number of items:{{ product.product_quantity }}</p>
+                <p style="display: flex; align-items: center; gap: 10px;">
+                    <a href="{% url 'shopping_cart:removefromcart' product.id %}">
+                        <button type="button" style="background-color: red; color: white; border: none; padding: 8px 12px; border-radius: 10px; cursor: pointer; width: 80px;">Remove</button>
+                    </a>
+                    <input name="quantity" type="number" id="numberBox_{{ product.id }}" value="{{ product.product_quantity }}" min="0" max="100" style="width: 50px; text-align: center;">
+                    <a href="{% url 'shopping_cart:addtocart' product.id %}">
+                        <button type="button" style="background-color: green; color: white; border: none; padding: 8px 12px; border-radius: 10px; cursor: pointer; width: 80px;">Add</button>
+                    </a>
+                </p>
+                <p>Total Price:</p>
+                <p style="display: flex; align-items: center; gap: 10px;">
+                    <a style="color:white" href="{% url 'shopping_cart:deleteitem' product.id %}">
+                        <button type="button" style="background-color: red; color: white; border: none; padding: 8px 12px; border-radius: 10px; cursor: pointer; width: 100px;">Delete item</button>
+                    </a>
+                    <a href="{% url 'shopping_cart:singleitemprice' product.id %}">
+                        <button type="button" style="background-color: green; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 100%;">Buy</button>
+                    </a>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+        <hr>
+        <a href="{% url 'shopping_cart:totalprice' %}">
+            <center><button type="button" class="button">Buy All</button></center>
+        </a>
+
+    </form>
+    {% else %}
+        <center><h4>Cart is Empty</h4></center>
+    {% endif %}
+
+</body>
+</html>

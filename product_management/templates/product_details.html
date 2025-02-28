@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>productdetails</title>
+    <style>
+    ul
+    {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li
+    {
+        float: left;
+    }
+    li a
+    {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover:not(.active)
+    {
+        background-color: #111;
+    }
+    .active
+    {
+        background-color: #04AA6D;
+    }
+    img
+    {
+        float:left
+    }
+    p
+    {
+        padding-left: 40%;
+        padding-right: 10%
+    }
+
+    .block
+    {
+          display: block;
+          width: 100%;
+          border: none;
+          background-color: black;
+          color: white;
+          padding: 14px 28px;
+          font-size: 16px;
+          cursor: pointer;
+          text-align: center;
+    }
+
+    .block:hover
+    {
+        background-color: #ddd;
+        color: black;
+    }
+    body
+    {
+        background-color: #e6e6ff
+    }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a class="active" href="{% url 'product_management:viewproducts' %}">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="{% url 'shopping_cart:contactus' %}">Contact</a></li>
+        <li style="float:right"><a href="{% url 'user_authentication:userlogout' %}">Logout</a></li>
+        <li style="float:right"><a href="{% url 'shopping_cart:listcart'%}">Cart</a></li>
+    </ul>
+
+    <center>
+            <h1>PRODUCT DETAILS</h1>
+    </center>
+                <img class="image" src="/media/{{product.product_image}}" alt="image" style="width:30%">
+        <br><br><br>
+                <b><p>Product name &emsp;&emsp;&ensp;:&ensp;&emsp;{{product.product_name}}</p></b><br>
+                <b><p>Product price &emsp;&emsp;&ensp;:&ensp;&emsp;{{product.product_price}}</p></b><br>
+                <p><b>Product description :</b>&ensp;&emsp;{{product.product_description}}</p><br>
+                <p><b>Stock available &emsp;&emsp;:</b>&ensp;&emsp;{{product.product_stock_availability}}</p><br>
+                <p class="p1"><marquee direction="right" behavior="alternate"
+                        style="border:black 1px solid back; background-color:#ffffcc;" ><font color="red">{{product.product_tag}}</font>
+                    </marquee>
+                </p>
+                 <br><br>
+               <button class="block"><a href="{% url 'shopping_cart:cartcreate' product.id %}" style="color:white">Add to Cart</a></button>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login page</title>
+</head>
+<style>
+         body
+        {
+            background-image: url("{% static 'images/5.jpg' %}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100%;
+        }
+          .profile-container {
+            background-color:   #bdc3db;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            margin: 50px auto;
+        }
+    </style>
+<body>
+    <center>
+        <br><br><br>
+        <div class="profile-container">
+            <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <center><h1>Sign In</h1></center>
+            <br>
+            <input type="text" placeholder="User Name" name="username"><br><br>
+            <input type="password" placeholder="Password" name="password"><br><br>
+            <center><button>Login</button></center>
+                <br>
+                <hr>
+            <p>Create new account<a href="{% url 'user_authentication:userregistration' %}">Sign Up</a></p>
+        </form>
+        </div>
+
+        {% if messages %}
+                {% for message in messages %}
+                    <div class="alert{{message.tags}}" style="color:red">
+                       <center>{{message}}</center>
+                    </div>
+                {% endfor %}
+        {% endif %}
+    </center>
+
+</body>
+</html>

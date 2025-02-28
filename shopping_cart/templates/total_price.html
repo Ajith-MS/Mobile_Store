@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>totalprice</title>
+    <style>
+            ul
+    {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li
+    {
+        float: left;
+    }
+    li a
+    {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover:not(.active)
+    {
+        background-color: #111;
+    }
+    .active
+    {
+        background-color: #04AA6D;
+    }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a class="active" href="{% url 'product_management:viewproducts' %}">Home</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li style="float:right"><a href="{% url 'user_authentication:userlogout' %}">Logout</a></li>
+        <li style="float:right"><a href="{% url 'shopping_cart:listcart'%}">Cart</a></li>
+    </ul>
+    <center>
+        <h1>Bill </h1>
+        <hr>
+        <img src="/media/PayPal.png" alt="Image" class="image">
+        <form method="post" action="{% url 'create_payment' %}">
+            {% csrf_token %}
+            <input type="hidden" value="{{total}}" name="amount" required><br><br>
+                    <p>Total price of your order is : Rs.{{total}}</p>
+
+                    <hr>
+
+            <button type="submit" style="background-color: blue; color: white; padding: 8px; border: none;">Pay with PayPal</button>
+        </form>
+    </center>
+
+</body>
+</html>
